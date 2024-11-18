@@ -1,0 +1,13 @@
+Ini adalah file contoh untuk testing enkripsi.
+File ini berisi beberapa baris teks.
+
+Data sensitif bisa dienkripsi dengan aman menggunakan tool ini.
+Contoh data:
+- Username: admin
+- Password: rahasia123
+- API Key: sk-1234567890abcdef
+
+Setelah dienkripsi, data ini akan berubah menjadi karakter acak
+yang tampak seperti URL WhatsApp dengan parameter yang panjang.
+
+Tanpa kata rahasia yang benar, tidak ada yang bisa membaca isi file ini.
