@@ -1,0 +1,95 @@
+# Logs
+*.log
+logs/
+*.log.*
+
+# OS
+.DS_Store
+Thumbs.db
+.Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# Android
+*.apk
+*.dex
+*.class
+bin/
+gen/
+build/
+.gradle/
+local.properties
+
+# ADB Backups
+*.ab
+backup/
+backups/
+*.backup
+
+# Temp Files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Generated Files
+*.out
+*.o
+*.so
+*.a
+
+# Node (if used for scripts)
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Screenshots/Videos
+screenshots/
+*.png
+*.jpg
+*.mp4
+*.webm
+
+# System Files
+.AppleDouble
+.LSOverride
+*.cab
+*.msi
+
+# Editor Specific
+.vimrc
+.editorconfig
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Misc
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ADB Server Files
+.adb_server_key/
+adb_server_key
+adb_pub_key
+
