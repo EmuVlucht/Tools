@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Mail - Temporary Email Service</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-envelope-open-text"></i>
+                <span>M-Mail</span>
+            </div>
+            <p class="tagline">Temporary Email Service - Protect Your Privacy</p>
+        </header>
+
+        <main class="main-content">
+            <div class="sidebar">
+                <div class="create-email-section">
+                    <h3><i class="fas fa-plus-circle"></i> Buat Email Baru</h3>
+                    
+                    <div class="create-options">
+                        <button class="btn btn-primary btn-full" id="createRandomBtn">
+                            <i class="fas fa-random"></i> Email Random
+                        </button>
+                        
+                        <div class="divider"><span>atau</span></div>
+                        
+                        <div class="custom-email-form">
+                            <div class="form-group">
+                                <input type="text" id="emailName" placeholder="Nama email" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <select id="domainSelect" class="form-select">
+                                    <option value="">Pilih domain...</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-secondary btn-full" id="createCustomBtn">
+                                <i class="fas fa-plus"></i> Buat Custom
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="email-list-section">
+                    <h3><i class="fas fa-inbox"></i> Daftar Email</h3>
+                    <div class="email-list" id="emailList">
+                        <div class="loading-placeholder">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Memuat email...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-panel">
+                <div class="inbox-header">
+                    <div class="current-email-info" id="currentEmailInfo">
+                        <i class="fas fa-envelope"></i>
+                        <span>Pilih email untuk melihat inbox</span>
+                    </div>
+                    <div class="inbox-actions">
+                        <button class="btn btn-icon" id="refreshInboxBtn" title="Refresh Inbox" disabled>
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="btn btn-icon btn-danger" id="deleteEmailBtn" title="Hapus Email" disabled>
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="inbox-container" id="inboxContainer">
+                    <div class="empty-state">
+                        <i class="fas fa-envelope-open"></i>
+                        <h3>Selamat Datang di M-Mail</h3>
+                        <p>Buat email sementara untuk melindungi privasi Anda.</p>
+                        <p>Email akan otomatis menerima pesan masuk.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="message-modal" id="messageModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalSubject">Subject</h3>
+                    <button class="btn btn-icon" id="closeModalBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="message-meta">
+                        <p><strong>Dari:</strong> <span id="modalFrom"></span></p>
+                        <p><strong>Kepada:</strong> <span id="modalTo"></span></p>
+                        <p><strong>Waktu:</strong> <span id="modalTime"></span></p>
+                    </div>
+                    <div class="message-content" id="modalContent"></div>
+                    <div class="message-attachments" id="modalAttachments"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 M-Mail - Temporary Email Service | Built with <i class="fas fa-heart"></i></p>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
