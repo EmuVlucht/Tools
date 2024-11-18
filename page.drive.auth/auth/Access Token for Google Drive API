@@ -1,0 +1,20 @@
+// Contoh mengambil file dari Google Drive
+app.get('/api/drive/files', async (req, res) => {
+    const accessToken = req.session.accessToken;
+    
+    try {
+        const response = await axios.get('https://www.googleapis.com/drive/v3/files', {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            },
+            params: {
+                pageSize: 10,
+                fields: 'files(id, name, mimeType, modifiedTime)'
+            }
+        });
+        
+        res.json(response.data);
+    } catch (error) {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+});
