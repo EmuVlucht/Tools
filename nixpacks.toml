@@ -1,8 +1,4 @@
-[phases.setup]
-nixPkgs = ["python311", "gcc"]
-
-[phases.install]
-cmds = ["pip install -r pyproject.toml || pip install flask flask-cors flask-sqlalchemy gunicorn psycopg2-binary requests sqlalchemy"]
+providers = ["python"]
 
 [start]
-cmd = "gunicorn app:app --bind 0.0.0.0:${PORT:-5000} --workers 2 --threads 4 --timeout 120"
+cmd = "gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120"
