@@ -1,0 +1,92 @@
+# Termux Binary Migration (Backup & Restore)
+
+Metode ini digunakan untuk memindahkan seluruh isi folder `$PREFIX/bin` dari satu perangkat Android ke perangkat lain **tanpa kehilangan symlink** dan **tanpa rusak permission**, meskipun melewati `/sdcard` atau flashdisk yang tidak mendukung permission UNIX.
+
+---
+
+## 📌 Fitur
+- Merekam semua symlink asli.
+- Menyalin semua binary sebagai file biasa (tanpa symlink error).
+- Memulihkan ulang symlink di perangkat baru.
+- Memperbaiki permission eksekusi yang hilang selama proses pemindahan.
+
+---
+
+## 🧩 Persiapan
+Jalankan semua perintah di dalam Termux.
+
+---
+
+## 📤 Backup di HP Asal
+
+### 1. Simpan daftar symlink
+```sh
+find $PREFIX/bin -type l -printf "%p -> %l\n" > symlink_list.txt
+``` 
+
+### 2. Salin seluruh isi `$PREFIX/bin` ke SDCard
+
+```sh
+mkdir -p /sdcard/bin
+cp -rL $PREFIX/bin/* /sdcard/bin
+``` 
+
+### 3. Salin daftar symlink ke SDCard
+
+```sh
+cp symlink_list.txt /sdcard/
+```
+
+### 4. Pindahkan `symlink_list.txt` dan `/sdcard/bin` ke flashdisk
+
+Gunakan file manager atau `cp` jika flashdisk ter-mount otomatis.
+
+📥 Restore di HP Tujuan
+
+### 5. Pindahkan file dari flashdisk ke `/sdcard` HP baru
+
+Pastikan folder `/sdcard/bin` berisi semua file hasil backup.
+
+### 6. Pindahkan binary ke `$PREFIX/bin`
+
+```sh
+mv /sdcard/bin/* $PREFIX/bin/ 
+```
+
+### 7. Pulihkan symlink sesuai daftar
+
+```sh
+while IFS=" -> " read -r link target; do
+    ln -sf "$target" "$link"
+done < symlink_list.txt
+```
+
+### 8. Perbaiki permission eksekusi
+
+```sh
+chmod -R +x $PREFIX/bin 
+```
+
+## 📝 Catatan Penting
+
+`/sdcard` tidak mendukung symlink, owner, maupun permission UNIX.
+
+Selalu pindahkan daftar symlink dalam bentuk file teks (`symlink_list.txt`).
+
+Gunakan `cp -rL` agar symlink difollow sebagai file asli.
+
+Setelah restore, symlink wajib dibangun ulang dengan skrip pada langkah 7.
+
+`chmod -R +x` diperlukan karena semua file yang melalui `/sdcard` akan kehilangan bit eksekusi.
+
+## ✔️ Hasil Akhir
+
+Perangkat baru akan memiliki:
+
+Struktur folder `$PREFIX/bin` identik dengan perangkat awal
+
+Semua symlink dikembalikan sesuai aslinya
+
+Semua binary dapat dijalankan tanpa error
+
+Proses ini aman untuk backup, migrasi, cloning environment Termux, atau membuat salinan environment ke perangkat lain.
