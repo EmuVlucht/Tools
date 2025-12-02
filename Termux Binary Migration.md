@@ -64,7 +64,8 @@ done < symlink_list.txt
 ### 8. Perbaiki permission eksekusi
 
 ```sh
-chmod -R +x $PREFIX/bin 
+chown -R u0_a$(id -u) $PREFIX/bin
+chmod -R +x $PREFIX/bin
 ```
 
 ---
