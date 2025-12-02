@@ -1,4 +1,4 @@
-```markdown
+
 # Search Script - Dokumentasi
 
 Script bash untuk mencari string pada nama file/folder dan isi file dengan output berwarna dan animasi disko.
@@ -196,4 +196,3 @@ Dibuat dengan ❤️ menggunakan Bash
 
 **Versi:** 1.0  
 **Terakhir diupdate:** Desember 2024
-```
