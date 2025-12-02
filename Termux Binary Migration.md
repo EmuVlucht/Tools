@@ -41,7 +41,7 @@ cp symlink_list.txt /sdcard/
 
 Gunakan file manager atau `cp` jika flashdisk ter-mount otomatis.
 
-📥 Restore di HP Tujuan
+## 📥 Restore di HP Tujuan
 
 ### 5. Pindahkan file dari flashdisk ke `/sdcard` HP baru
 
@@ -67,6 +67,8 @@ done < symlink_list.txt
 chmod -R +x $PREFIX/bin 
 ```
 
+---
+
 ## 📝 Catatan Penting
 
 `/sdcard` tidak mendukung symlink, owner, maupun permission UNIX.
@@ -78,6 +80,8 @@ Gunakan `cp -rL` agar symlink difollow sebagai file asli.
 Setelah restore, symlink wajib dibangun ulang dengan skrip pada langkah 7.
 
 `chmod -R +x` diperlukan karena semua file yang melalui `/sdcard` akan kehilangan bit eksekusi.
+
+---
 
 ## ✔️ Hasil Akhir
 
