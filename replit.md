@@ -16,6 +16,8 @@ Aplikasi web full-stack untuk membuat dan mengelola email sementara (temporary e
 │   └── js/
 │       └── app.js      # Frontend JavaScript
 ├── contoh/             # Folder contoh dan tools
+│   ├── obfuscator_advanced.py  # Advanced Python Obfuscator v2.0
+│   ├── obfuscator.py   # Basic Python Obfuscator
 │   ├── crypto_tool.py  # Script enkripsi/dekripsi file (AES-256-GCM)
 │   ├── generate_url.sh # Generator URL dengan parameter acak
 │   ├── text.txt        # File contoh untuk testing enkripsi
@@ -134,7 +136,48 @@ https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy?key1=value1&key2=value2&...
 - pycryptodome (untuk AES-256-GCM)
 - argon2-cffi (opsional, untuk compatibility)
 
+## Advanced Python Obfuscator (contoh/obfuscator_advanced.py)
+Script untuk mengamankan kode Python dengan multi-layer protection.
+
+### Fitur Keamanan (5 Layer)
+1. **Layer 1**: Marshal + Zlib compression
+2. **Layer 2**: XOR encryption dengan random key
+3. **Layer 3**: Byte shuffling algorithm
+4. **Layer 4**: Chunk-based encoding + CRC32 checksum
+5. **Layer 5**: Integrity verification (SHA256)
+
+### Fitur Tambahan
+- **Anti-debugging** - Deteksi debugger (Windows/Linux)
+- **Password Protection** - Opsional AES-256-CBC + PBKDF2
+- **Format URL WhatsApp** - Output tersamar sebagai URL
+- **Executable** - Hasil bisa langsung dijalankan dengan `python3`
+
+### Karakter Output
+```
+a-z A-Z 0-9 _ = - . & % +
+```
+
+### Format Output
+```
+https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy?key1=value1&key2=value2&...
+```
+
+### Penggunaan
+```bash
+# Tanpa password
+python contoh/obfuscator_advanced.py script.py
+
+# Dengan nama output custom
+python contoh/obfuscator_advanced.py script.py protected.py
+```
+
+### Menjalankan File Terproteksi
+```bash
+python3 nama_file_protected.py
+```
+
 ## Recent Changes
+- **Dec 2024**: Added Advanced Python Obfuscator v2.0 with 5-layer protection
 - **Dec 2024**: Added secure file encryption/decryption tool (AES-256-GCM)
 - **Dec 2024**: Added Google OAuth login system
 - **Dec 2024**: Added User model with per-user email storage
