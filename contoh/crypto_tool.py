@@ -102,10 +102,37 @@ def _custom_encoding_to_bytes(encoded: str) -> bytes:
     return base64.b64decode(b64_string)
 
 
+def _add_extra_chars(data: str, seed: int) -> str:
+    """Tambahkan karakter . dan + secara acak ke data untuk variasi"""
+    import random
+    rng = random.Random(seed)
+    
+    result = list(data)
+    extra_chars = '.+'
+    
+    # Tambahkan karakter ekstra di posisi acak (sekitar 5% dari panjang data)
+    num_extras = max(1, len(data) // 20)
+    
+    for _ in range(num_extras):
+        pos = rng.randint(0, len(result))
+        char = extra_chars[rng.randint(0, 1)]
+        result.insert(pos, char)
+    
+    return ''.join(result)
+
+
+def _remove_extra_chars(data: str) -> str:
+    """Hapus karakter . dan + dari data"""
+    return data.replace('.', '').replace('+', '')
+
+
 def _format_as_url_params(data: str, seed: int) -> str:
     """Format data sebagai URL parameters yang terstruktur (deterministic)"""
     import random
     rng = random.Random(seed)
+    
+    # Tambahkan karakter . dan + untuk variasi
+    data = _add_extra_chars(data, seed + 1)
     
     result = []
     i = 0
@@ -143,8 +170,11 @@ def _parse_url_params(url_data: str) -> str:
     if url_data.startswith(URL_PREFIX):
         url_data = url_data[len(URL_PREFIX):]
     
-    # Remove separators & and =
+    # Remove separators & dan =
     result = url_data.replace('=', '').replace('&', '')
+    
+    # Remove extra chars . dan +
+    result = _remove_extra_chars(result)
     
     return result
 
