@@ -57,20 +57,24 @@ def _derive_key(password: str, salt: bytes) -> bytes:
 
 
 def _bytes_to_custom_encoding(data: bytes) -> str:
-    """Convert bytes ke custom encoding menggunakan charset yang diminta"""
+    """Convert bytes ke custom encoding menggunakan charset yang diminta
+    Karakter yang digunakan: a-z A-Z 0-9 _ - . % +
+    (& dan = digunakan sebagai separator URL)
+    """
     # Encode ke base64 terlebih dahulu
     b64_encoded = base64.b64encode(data).decode('ascii')
     
-    # Replace karakter base64 dengan custom chars yang aman
-    # Tidak menggunakan & dan = karena akan jadi separator URL
+    # Replace karakter base64 dengan custom chars
+    # Base64 chars: A-Z a-z 0-9 + / =
+    # Target chars: a-z A-Z 0-9 _ - . % +
     result = []
     for char in b64_encoded:
         if char == '=':
-            result.append('_')  # padding
+            result.append('_')  # padding -> underscore
         elif char == '+':
-            result.append('-')  # plus sign
+            result.append('%')  # plus -> percent
         elif char == '/':
-            result.append('.')  # slash
+            result.append('-')  # slash -> dash
         else:
             # Huruf dan angka tetap
             result.append(char)
@@ -84,11 +88,11 @@ def _custom_encoding_to_bytes(encoded: str) -> bytes:
     result = []
     for char in encoded:
         if char == '_':
-            result.append('=')  # padding
+            result.append('=')  # underscore -> padding
+        elif char == '%':
+            result.append('+')  # percent -> plus
         elif char == '-':
-            result.append('+')  # plus sign
-        elif char == '.':
-            result.append('/')  # slash
+            result.append('/')  # dash -> slash
         else:
             result.append(char)
     
