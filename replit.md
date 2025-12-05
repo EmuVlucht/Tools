@@ -15,6 +15,11 @@ Aplikasi web full-stack untuk membuat dan mengelola email sementara (temporary e
 │   │   └── style.css   # Modern CSS styling with auth components
 │   └── js/
 │       └── app.js      # Frontend JavaScript
+├── contoh/             # Folder contoh dan tools
+│   ├── crypto_tool.py  # Script enkripsi/dekripsi file (AES-256-GCM)
+│   ├── generate_url.sh # Generator URL dengan parameter acak
+│   ├── text.txt        # File contoh untuk testing enkripsi
+│   └── text.txt.encrypted  # Contoh hasil enkripsi
 ├── page.drive.auth/    # Reference files for Google OAuth implementation
 ├── Procfile            # Railway/Heroku deployment
 ├── railway.toml        # Railway configuration
@@ -100,7 +105,37 @@ python app.py
 gunicorn app:app --bind 0.0.0.0:5000 --workers 2
 ```
 
+## Crypto Tool (contoh/crypto_tool.py)
+Script untuk enkripsi/dekripsi file dengan keamanan tinggi.
+
+### Fitur Keamanan
+- **AES-256-GCM** - Enkripsi tingkat militer
+- **PBKDF2-SHA512** - Key derivation dengan 600,000 iterasi
+- **Salt & Nonce unik** - Random 32-byte salt dan 12-byte nonce per enkripsi
+- **HMAC-SHA256** - Verifikasi integritas tambahan
+- **Kata rahasia** - Minimum 8 karakter
+
+### Penggunaan
+```bash
+# Enkripsi file
+python contoh/crypto_tool.py encrypt nama_file.txt
+
+# Dekripsi file
+python contoh/crypto_tool.py decrypt nama_file.txt.encrypted
+```
+
+### Format Output
+Hasil enkripsi berformat URL WhatsApp:
+```
+https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy?key1=value1&key2=value2&...
+```
+
+### Dependencies
+- pycryptodome (untuk AES-256-GCM)
+- argon2-cffi (opsional, untuk compatibility)
+
 ## Recent Changes
+- **Dec 2024**: Added secure file encryption/decryption tool (AES-256-GCM)
 - **Dec 2024**: Added Google OAuth login system
 - **Dec 2024**: Added User model with per-user email storage
 - **Dec 2024**: Implemented ownership validation for security
