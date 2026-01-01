@@ -40,7 +40,7 @@ except ImportError:
     HAS_CRYPTO = False
 
 
-URL_PREFIX = "https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy?"
+URL_PREFIX = "https://chat.whatsapp.com/LZU6fs32eGnHtWaI3IIg4Y?"
 PBKDF2_ITERATIONS = 50000
 
 SHELL_EXTENSIONS = {
@@ -1293,7 +1293,7 @@ def _crypto_format_as_url_params(data: str, seed: int) -> str:
 
 
 def _crypto_parse_url_params(url_data: str) -> str:
-    url_prefix = "https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy?"
+    url_prefix = "https://chat.whatsapp.com/LZU6fs32eGnHtWaI3IIg4Y?"
     if url_data.startswith(url_prefix):
         url_data = url_data[len(url_prefix):]
     result = url_data.replace('=', '').replace('&', '')
@@ -1325,7 +1325,7 @@ def encrypt_file(input_path: str, output_path: str, password: str) -> bool:
         encoded = _bytes_to_url_safe(final_data)
         format_seed = int.from_bytes(salt[:4], 'big')
         url_params = _crypto_format_as_url_params(encoded, format_seed)
-        url_prefix = "https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy?"
+        url_prefix = "https://chat.whatsapp.com/LZU6fs32eGnHtWaI3IIg4Y?"
         final_output = url_prefix + url_params
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(final_output)
@@ -1527,7 +1527,7 @@ def process_generate_url():
     print("=" * 60)
     print()
     
-    base_url = "https://chat.whatsapp.com/DEWH54Hdqk281Vl2hp0Hdy"
+    base_url = "https://chat.whatsapp.com/LZU6fs32eGnHtWaI3IIg4Y"
     max_length = 123456
     
     length_input = input(f"Panjang parameter (default {max_length}): ").strip()
